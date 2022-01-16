@@ -1,5 +1,6 @@
+import test.Voler;
+
 import java.awt.Dimension;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
@@ -21,6 +22,7 @@ public class Main {
 		Etat modele = new Etat(test);
 		Control ctrl = new Control(modele, test);
 		test.addMouseListener(ctrl);
+		new Voler(modele).start();
 		JFrame frame = new JFrame("Fenetre principale");
 		frame.add(test);
 		frame.pack();

@@ -31,11 +31,7 @@ public class Control implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1) { //Si clic gauche, alors on fait monter notre anneau tout en rafraichissant notre fênetre avec la méthode repaint
-			modele.jump(-10);
-			fenetre.repaint(); //permet de repeindre dans notre fenetre
-		}
-		else if(e.getButton() == MouseEvent.BUTTON3) { //Si clic droit, alors on fait descendre notre anneau tout en rafraichissant notre fênetre avec la méthode repaint
-			modele.jump(10);
+			modele.jump();
 			fenetre.repaint(); //permet de repeindre dans notre fenetre
 		}
 	}

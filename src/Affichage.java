@@ -1,5 +1,5 @@
 import java.awt.*;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * La Classe Affichage définit l’affichage de notre fenetre, c'est à dire comment l’état du modèle est rendu visible à l’utilisateur.
@@ -11,7 +11,8 @@ import javax.swing.JPanel;
 
 public class Affichage extends JPanel{
 
-	private final JPanel crea;
+	private final JPanel crea = new JPanel();
+	private JLabel score = new JLabel("Score joueur : ", SwingConstants.CENTER);
 
 	/**
 	 * Les 2 constantes suivantes (largeur et hauteur) sont définis de tel sorte à imposer une limite de longueur à notre fenetre.
@@ -27,8 +28,8 @@ public class Affichage extends JPanel{
 	/**
 	 * Les 2 constantes suivantes représente la dimension de notre figure
 	 */
-	private static final int dimOvalX = 30;
-	private static final int dimOvalY = 100;
+	public static final int dimOvalX = 30;
+	public static final int dimOvalY = 100;
 	
 	private final Etat liaison = new Etat(this); 
 
@@ -36,7 +37,6 @@ public class Affichage extends JPanel{
 	 * Constructeur initialisant un nouveau JPanel et en lui mettant une dimension de : largeur * hauteur
 	 */
 	public Affichage () {
-		crea = new JPanel();
 		crea.setPreferredSize(new Dimension(width, height)); //Dimension du composant
 		System.out.println(liaison.getRoute().getCoord().size());
 	}
@@ -85,7 +85,6 @@ public class Affichage extends JPanel{
 
 			g.setColor(Color.RED); //On définit la couleur de l'anneau comme étant du bleu
 			g.drawLine(p1.x, p1.y, p2.x, p2.y);
-
 		}
 	}
 	/*Affichage de notre anneau

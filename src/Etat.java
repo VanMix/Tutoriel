@@ -8,8 +8,8 @@ public class Etat {
 	
 	//Ici la valeur hauteur n'est pas considéré comme une constante car elle sera modifié en fonction des actions effectués dans la classe Control
 	public static int hauteur = 200;
-	public static final int down = 2;
-	public static final int up = 20;
+	public static final int down = 3;
+	public static final int up = 30;
 
 	private final Affichage fenetre;
 	private final Parcours route = new Parcours();

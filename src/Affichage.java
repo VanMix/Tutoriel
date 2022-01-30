@@ -1,5 +1,11 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import static javax.imageio.ImageIO.read;
 
 /**
  * La Classe Affichage définit l’affichage de notre fenetre, c'est à dire comment l’état du modèle est rendu visible à l’utilisateur.
@@ -12,8 +18,6 @@ import javax.swing.*;
 public class Affichage extends JPanel{
 
 	private final JPanel crea = new JPanel();
-	private JLabel score = new JLabel("Score joueur : ", SwingConstants.CENTER);
-
 	/**
 	 * Les 2 constantes suivantes (largeur et hauteur) sont définis de tel sorte à imposer une limite de longueur à notre fenetre.
 	 */
@@ -31,14 +35,18 @@ public class Affichage extends JPanel{
 	public static final int dimOvalX = 30;
 	public static final int dimOvalY = 100;
 	
-	private final Etat liaison = new Etat(this); 
+	private final Etat liaison = new Etat(this);
 
+	private BufferedImage img; // image de fond
+
+	private static boolean finDePartie  = true;
 	/**
 	 * Constructeur initialisant un nouveau JPanel et en lui mettant une dimension de : largeur * hauteur
 	 */
-	public Affichage () {
+	public Affichage () throws IOException {
 		crea.setPreferredSize(new Dimension(width, height)); //Dimension du composant
-		System.out.println(liaison.getRoute().getCoord().size());
+
+		img = ImageIO.read(new File("C:\\Users\\charl\\L3 Info\\S6\\PCII\\Tutoriel\\src\\fondXP.jpg"));
 	}
 		
 	public Etat getLiaison(){
@@ -50,7 +58,15 @@ public class Affichage extends JPanel{
 	public int getWidth() {
 		return width;
 	}
-	
+
+	public static boolean isFinDePartie() {
+		return finDePartie;
+	}
+
+	public static void setFinDePartie(){
+		finDePartie = false;
+	}
+
 	/**
 	 * Getter pour récupérer la constante hauteur 
 	 */
@@ -94,6 +110,14 @@ public class Affichage extends JPanel{
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		super.revalidate();
+		super.repaint();
+
+		Graphics2D g2 = (Graphics2D) g;
+
+		g.drawImage(img, 0, 0, width, height, null);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
 		drawOval(g);
 		drawLigneBrisee(g);
 	}

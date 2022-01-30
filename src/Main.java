@@ -1,20 +1,23 @@
 
 import java.awt.*;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Parcours t = new Parcours();
-		for(Point p : t.getCoord()){
-			System.out.println(p.getX()+", "+p.getY());
-		}
 		Affichage aff = new Affichage();
 		Control ctrl = new Control(aff.getLiaison(), aff);
 		aff.addMouseListener(ctrl);
 		new Thread(new Voler(aff.getLiaison())).start();
+
 		JFrame frame = new JFrame("Fenetre principale");
+
+		// thread pour la methode de collision et la fenetre d'arret
+		(new Thread(new Stop(aff))).start();
+
 		frame.add(aff);
 		frame.pack();
 		frame.setSize(new Dimension(500, 500));

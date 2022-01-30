@@ -32,7 +32,6 @@ public class Control implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1) { //Si clic gauche, alors on fait monter notre anneau tout en rafraichissant notre fênetre avec la méthode repaint
 			modele.jump();
-			fenetre.repaint(); //permet de repeindre dans notre fenetre
 		}
 	}
 

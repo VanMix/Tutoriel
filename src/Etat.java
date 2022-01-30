@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * La classe Etat représente ici notre Modèle qui définit l’ensemble des données qui caractérisent l’état de notre interface. 
  * En fonction des changements effectués avec la classe Control, l’affichage dans l’interface graphique sera modifié.
@@ -13,7 +15,7 @@ public class Etat {
 
 	private final Affichage fenetre;
 	private final Parcours route = new Parcours();
-	
+
 	public Etat(Affichage fen) {
 		fenetre = fen;
 	}
@@ -50,8 +52,20 @@ public class Etat {
 		int borneHeight = (int)(fenetre.getOvY()*1.2); //borne supérieur de notre fenetre
 		if(majSaut > 0 && majSaut + borneHeight < fenetre.getHeight()) { //Condition pour tester si l'on est dans les bornes
 			hauteur = majSaut;
-			fenetre.revalidate();
-			fenetre.repaint();
 		}
+	}
+
+	// methode qui mets en place les collisions et leur detections
+	public boolean testPerdu() {
+		Point p1 = route.getCoord().get(0);
+		Point p2 = route.getCoord().get(1);
+		float pente = ((p1.y) - (p2.y)) / ((float) (p1.x) - (float) (p2.x));
+		float y = p1.y - pente * (p1.x - Affichage.dimOvalX);
+
+		if (y < hauteur || y > hauteur + Affichage.dimOvalY) {
+			return true;
+		}
+
+		return false;
 	}
 }

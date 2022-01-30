@@ -17,17 +17,17 @@ public class Parcours {
     public Parcours() {
         positionDepart = new Point(Affichage.dimOvalX,
                 Affichage.height - Affichage.dimOvalY / 2);
-        coord.add(positionDepart);
+        //coord.add(positionDepart);
 
-        int x = positionDepart.x;
-        int y = positionDepart.y;
+        int x = 0;//positionDepart.x;
+        int y = 250;//positionDepart.y;
         Random r = new Random();
 
         coord.add(new Point(x, y));
 
         while (x < Affichage.width) {
             x = x + r.nextInt(longueurMaxLigne - longueurMinLigne) + 20;
-            y = (r.nextInt(plage) + bordureMinLigne);
+            y = 250;// (r.nextInt(plage) + bordureMinLigne);
             Point newPoint = new Point(x, y);
             coord.add(newPoint);
         }
@@ -42,8 +42,8 @@ public class Parcours {
         return coord;
     }
 
-    public void setPosition(int pos) {
-        position += pos;
+    public void setPosition() {
+        position++;
     }
 
 /*
@@ -82,6 +82,7 @@ public class Parcours {
     public void removePointInvisible() {
         if (coord.get(0).x < 0 && coord.get(1).x < 0) {
             coord.remove(0);
+            setPosition();
         }
     }
 
